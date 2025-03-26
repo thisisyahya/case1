@@ -497,7 +497,21 @@
 
 
 
+<script>
+window.addEventListener("beforeunload", function (event) {
+  event.preventDefault(); // Required for Chrome
+  event.returnValue = ""; // Required for standard behavior
 
+  // Custom confirmation dialog
+  const confirmation = confirm("If you reload, you will be disconnected.\n\nDo you want to reload?");
+
+  if (!confirmation) {
+    history.pushState(null, "", location.href); // Prevents reload
+    throw new Error("Reload prevented"); // Stop further execution
+  }
+});
+
+</script>
 
 
 
