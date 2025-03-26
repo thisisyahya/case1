@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <style>
+      *{
+        padding:0;
+        margin:0;
+        box-sizing: border-box;
+        font-family: "Poppins";
+      }
+   
+      body{
+        padding:0;
+      }
+      /*
+
+       .container {
+            margin: auto;
+            margin-top:80px;
+            background:linear-gradient(135deg, rgb(27, 0, 27), rgb(0, 62, 65));
+            background: #ffffff;
+            padding: 20px;
+  
+            width:80vw;
+            max-width: 1200px;
+            min-width: 300px;
+            box-shadow: 4px 4px 10px rgba(77, 77, 77, 0), -4px -4px 10px rgba(71, 71, 71, 0);
+            color:rgb(34, 34, 34);
+            border:1px solid #cccccca6;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        label {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background: #f0f0f0;
+            color: #fff;
+            outline: none;
+        }
+
+        .rooms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .room {
+            padding: 10px 15px;
+            background: #c1ff9e;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .room:hover {
+            background: #95ff57;
+        }
+
+       
+
+       
+
+        .private{
+            width:100vw;
+            padding:80px 0px;
+            padding-top:0px;
+        }
+        .private-container{
+            max-width:1200px;
+            width:80vw;
+            min-width:300px;
+            padding:20px 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            gap:12px;
+            border:1px solid #cccccc;
+        }
+      .private-container p{
+        font-size: 32px;
+        
+      }
+      .private-btn{
+        border:none;
+        background:none;
+        width:150px;
+        padding:10px 20px;
+        text-align: center;
+        color:white;
+        background-color: green;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+      .private-btn:hover{
+        cursor: pointer;
+        background-color: rgba(0, 128, 0, 0.89);
+      }
+@media(width<=746px){
+  .private-paragraph{
+    font-size:24px !important;
+    text-align: center;
+  }
+} */
+
+
+
+
+
+
+
+
+
+
+/*new css */
+ /* Import Google Font */
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Reset & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #1b1b1b;
+    padding: 20px;
+    color:rgb(0, 0, 0);
+}
+
+/* Games Section */
+.games {
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    color:white;
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Game Cards Grid */
+.game-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 10px;
+}
+
+/* Individual Game Card */
+.game-card {
+    background: #2a2a2a;
+    border-radius: 10px;
+    padding: 15px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.game-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.game-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.game-desc {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+.game-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 5px 0;
+    text-decoration: none;
+    text-align: center;
+    border:none;
+}
+.game-btn:hover{
+  cursor: pointer;
+}
+
+.join-btn {
+    background: #ff5722;
+    color: #fff;
+}
+
+.create-room {
+    background: #03a9f4;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-cards {
+        grid-template-columns: repeat(3, 1fr); /* 3 Cards per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .game-cards {
+        grid-template-columns: repeat(2, 1fr); /* 2 Cards per row */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.form-container {
+            display:none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            z-index: 1000;
+            width: 300px;
+            text-align: center;
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+
+
+
+    </style>
+  </head>
+  <body>
+    
+<!--
+    <div class="container">
+      <h2>Enter Your Name First</h2>
+      <label for="name">Enter Your Name:</label>
+      <input type="text" id="name" placeholder="Your name..." required autofocus>
+  </div>
+-->
+
+
+
+
+
+
+
+
+
+  <section class="games">
+    <h2>🎮 Choose Your Game</h2>
+    <div class="game-cards">
+
+        <div class="game-card">
+            <img src="https://source.unsplash.com/400x250/?game,shooter" alt="Game Image">
+            <div class="game-title">Battle Royale</div>
+            <div class="game-desc">Survive till the last moment.</div>
+            <a href="#" class="game-btn join-btn">Join Game</a>
+            <a href="#" class="game-btn create-room">Create Room</a>
+        </div>
+
+        <div class="game-card">
+            <img src="https://source.unsplash.com/400x250/?racing,game" alt="Game Image">
+            <div class="game-title">Speed Racer</div>
+            <div class="game-desc">Fastest car wins the race.</div>
+            <a href="#" class="game-btn join-btn">Join Game</a>
+            <a href="#" class="game-btn create-room">Create Room</a>
+        </div>
+
+        <div class="game-card">
+            <img src="https://source.unsplash.com/400x250/?puzzle,game" alt="Game Image">
+            <div class="game-title">Mind Bender</div>
+            <div class="game-desc">Solve tricky puzzles & win.</div>
+            <a href="#" class="game-btn join-btn">Join Game</a>
+            <a href="#" class="game-btn create-room">Create Room</a>
+        </div>
+
+        <div class="game-card">
+            <img src="https://source.unsplash.com/400x250/?adventure,game" alt="Game Image">
+            <div class="game-title">Lost in Jungle</div>
+            <div class="game-desc">Find way out & survive.</div>
+            <a href="#" class="game-btn join-btn">Join Game</a>
+            <a href="#" class="game-btn create-room">Create Room</a>
+        </div>
+
+        <div class="game-card">
+            <img src="https://source.unsplash.com/400x250/?zombie,game" alt="Game Image">
+            <div class="game-title">Zombie Hunt</div>
+            <div class="game-desc">Kill zombies, stay alive.</div>
+            <a href="#" class="game-btn join-btn">Join Game</a>
+            <a href="#" class="game-btn create-room">Create Room</a>
+        </div>
+
+
+
+    </div>
+</section>
+
+
+
+
+
+
+
+<div class="form-container">
+    <form method="POST" action="" class="form">
+        <button type="button" class="close-btn">X</button>
+        <h2>Create Game Room</h2>
+        <label>Game:</label>
+        <input type="text" id="game-name" name="game" value="" readonly>
+
+        <label>Number of Players:</label>
+        <input type="number" name="players" min="2" max="10" id="players" required>
+
+        <button type="submit">Create Room</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+<script>
+  document.querySelectorAll(".create-room").forEach(button => {
+    button.addEventListener('click', (event) => {
+        event.preventDefault();
+        document.querySelector(".form-container").style.display = "block";
+
+        // Get the closest game card
+        const gameCard = event.target.closest(".game-card");
+        if (gameCard) {
+            const gameTitle = gameCard.querySelector(".game-title").innerText;
+            document.querySelector("#game-name").value = gameTitle;
+        }
+        
+    });
+});
+
+const form = document.querySelector(".form");
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    
+    let gameName = document.querySelector("input[name='game']").value;
+    let players = document.querySelector("input[name='players']").value;
+
+    // Set form action dynamically
+    event.target.action = `/createroom?game=${encodeURIComponent(gameName)}&players=${encodeURIComponent(players)}`;
+
+    // Submit the form
+    event.target.submit();
+});
+
+
+const closeButton = document.querySelector(".close-btn");
+
+if (closeButton) {
+    closeButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        document.querySelector(".form-container").style.display = "none";
+        document.querySelector(".overlay").style.display = "none";
+    });
+}
+</script>
+
+
+
+
+
+
+
+
+<!--
+<div class="private">
+    <div class="private-container">
+        <p class="private-paragraph">Create Private Room</p>
+        <form method="post" id="createroom">
+        <button id="createRoomLink" class="private-btn">Create</button>
+      </form>
+
+
+    </div>
+</div>-->
+
+
+<!--
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var usernameInput = document.getElementById("name");
+      var createRoomForm = document.getElementById("createroom");
+
+      createRoomForm.addEventListener("submit", function(event) {
+          var username = usernameInput.value.trim();
+
+          if (!username) {
+              alert("Please enter your name before creating a room.");
+              event.preventDefault(); // Prevent form submission if no username
+              return;
+          }
+          
+          // Update the form's action dynamically
+          createRoomForm.action = `/createroom`;
+      });
+  });
+</script>
+
+  <script>
+    var username;
+      
+      function connectRoom(roomname) {
+           username = document.getElementById("name").value.trim();
+           console.log(username);
+          if (!username) {
+              alert("Please enter your name before joining a chatroom.");
+              return;
+          }
+          //window.location.href = `/chatroom?roomname=${roomname}&username=${username}`;
+          document.querySelectorAll(".create-room").forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            
+            fetch('/create-room', { // Replace with your actual POST route
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ game: "Soccer Stars" }) // You can add game-specific data
+            }).then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url; // Redirect if the server responds with a redirect
+                }
+            }).catch(error => console.error("Error:", error));
+        });
+    });
+      }
+  </script>
+
+-->
+
+  </body>
+</html>

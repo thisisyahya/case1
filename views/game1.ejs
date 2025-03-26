@@ -1,0 +1,754 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <title>Story Chat Room</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+        padding:0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            color: #333;
+      
+        }
+
+
+
+
+
+
+
+
+
+
+
+        .page-container {
+            margin:20px auto;
+            display: flex;
+            justify-content: space-between;
+        
+            column-gap: 20px;
+            width: 100vw;
+            padding: 0px 20px;
+            max-height: 100vh;
+
+        }
+
+
+
+        .case-container {
+            max-width: 1200px;
+            min-width:300px;
+            width: 50vw;
+            background: rgb(220, 252, 194);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+            padding: 20px;
+            overflow-y: scroll;
+            
+        }
+
+        .case-wrapper {
+            max-width: 800px;
+            margin: auto;
+            text-align: left;
+        }
+
+        .case-text {
+            font-size: 16px;
+            color: #1c4b27;
+            /* Dark green */
+            margin-bottom: 20px;
+        }
+
+        .case-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 12px;
+        }
+
+        .option {
+            background-color: #2f8f4b;
+            /* Medium green */
+            color: white;
+            border: none;
+            padding: 4px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .clicked {
+            opacity: 0.3;
+            background-color: #2f8f4ca9;
+            cursor: auto;
+        }
+
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .case-text {
+                font-size: 16px;
+            }
+
+            .case-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .option {
+                font-size: 13px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .case-text {
+                font-size: 14px;
+            }
+
+            .case-options {
+                grid-template-columns: 1fr;
+            }
+
+            .option {
+                font-size: 12px;
+                padding: 8px;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .container {
+            width: 48%;
+            max-width: 600px;
+            min-width:300px;
+            margin: auto;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 128, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: green;
+        }
+
+        .room-info {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .players {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px;
+            white-space: nowrap;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        .player {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            background: #00000000;
+            border-radius: 20px;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .player img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .tick {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px; /* Small size */
+    color: green;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index:1000;
+    border-radius: 100%;
+    border:1px solid rgb(170, 255, 170);
+    background-color:rgb(214, 255, 214);
+}
+
+/* Show tick when a specific class is added */
+.show {
+    opacity: 1;
+}
+
+        .turn-indicator {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: green;
+        }
+
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+
+
+        .own-message {
+            background: rgb(126, 255, 126);
+            color: rgb(31, 31, 31);
+            align-self: flex-end;
+
+            padding: 0px 10px;
+            margin: 10px 0;
+            border-radius: 15px;
+            max-width: 80%;
+            min-width: 100px;
+            border-radius:4px;
+        }
+
+        .other-message {
+            background: #eaeaea;
+            color: #333;
+            border-radius:4px;
+            padding: 4px 10px !important;
+            margin: 10px 0;
+
+            max-width: 80%;
+            min-width: 100px;
+            margin-left: auto;
+
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-area input {
+            box-sizing: border-box;
+            flex: 1;
+            padding: 3px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .input-area button {
+            background: green;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 280px) {
+            .container {
+                padding: 15px;
+            }
+
+            .player {
+                font-size: 12px;
+            }
+
+            .input-area input {
+                font-size: 12px;
+            }
+
+            .input-area button {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+   
+
+      
+        /* Scoreboard Container (Hidden Initially) */
+        #scoreboard {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            max-width: 500px;
+            height: auto;
+            background: rgba(0, 100, 0, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: none;
+            text-align: center;
+            z-index:10000;
+        }
+        #scoreboard h2{
+            color:white;
+        }
+
+        /* Player Card */
+        .player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .player img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .player-info {
+            font-size: 18px;
+        }
+
+        @media(width<=746px){
+            .page-container{
+                flex-direction: column;
+            }
+            .case-container{
+                width:90vw;
+                min-width:300px;
+                margin: auto;
+                min-height:300px;
+            }
+            .container{
+                width:90vw;
+                min-width:300px;
+                margin: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-container">
+
+        <div class="case-container" style="position: relative;">
+            <img src="https://i.pinimg.com/originals/89/55/ee/8955ee32eb28ad12add57ea059461fb0.gif" class="case-overlay"style="position:absolute; top:0px; rigjht:0px; height:100%; width:100%; z-index:1000;">
+            <div class="case-wrapper">
+                <div class="case-content">
+                    <p class="case-text"></p>
+                </div>
+                <div class="case-options">
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container">
+            <h2>
+                <%= game %>
+            </h2>
+            <div class="room-info">Room ID: <span id="room-id">
+                    <%= roomId %>
+                </span></div>
+
+            <div class="players" id="playersContainer">
+                <!-- Player list will be populated dynamically -->
+                <div class="player" id="player1">
+                    Yahya Ali
+                    <img src="https://via.placeholder.com/30" alt="Player Image">
+                    <i class=" tick fas fa-check-circle"></i>
+                </div>
+
+            </div>
+
+            <div class="turn-indicator" id="turn-indicator"></div>
+
+            <div class="chat-box">
+                <!-- Chat messages will appear here -->
+
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="message-input" placeholder="Type your part of the story...">
+                <button id="send-btn" onclick="sendMsg()">Send</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+        <!-- Scoreboard (Initially Hidden) -->
+        <div id="scoreboard">
+            <h2>Final Scores</h2>
+            <div id="players-list">no ne guesed it right</div> <!-- Dynamic Player List -->
+
+            <div id="play-more-section">
+                <p style="font-size: 14px; color: #e2e2e2; margin-top: 15px;">This room has auto-deleted. You have to create another room to play more 😊</p>
+                <a href="/" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background: #007bff; color: #fff; text-decoration: none; border-radius: 5px; font-size: 14px;">Play More</a>
+            </div>
+        </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script>
+        let isset = false;
+        const socket = io("http://localhost:3000", { transports: ["websocket"] });
+
+
+
+        let roomId = "<%= roomId %>"; // Ensure roomId is correctly set from your backend template engine
+        let userId = "<%= userId %>";
+        let maxPlayers = "<%= maxPlayers %>";
+        let socketId = "";
+
+        console.log(roomId, userId);
+        socket.emit("gameJoined", { roomId, userId }); // Send roomId to the server
+
+
+        // Listen for the updatePlayers event
+        socket.on("updatePlayers", (data) => {
+            socketId = data.socketId;
+
+            let playerCount = document.getElementById("turn-indicator");
+            if (data.players.length < maxPlayers && isset === false) {
+
+                playerCount.innerText = `waiting for players - ${data.players.length}/${maxPlayers} joined`;
+            }
+            else if (isset === true) {
+                playerCount.innerText = "solve the riddle, best of luck!";
+            }
+
+            else {
+                playerCount.innerHTML = ` <p style="
+        font-size: 20px; 
+        font-family: Arial, sans-serif; 
+        font-weight: bold; 
+        color: #333; 
+        padding: 10px 20px; 
+        border-radius: 8px; 
+        transition: all 0.6s ease-in-out; 
+        cursor: pointer;"
+        onmouseover="this.style.color='#ff6600'; this.style.transform='scale(1.1)';"
+        onmouseout="this.style.color='#333'; this.style.transform='scale(1)';"
+    >
+        Game is starting soon...
+    </p>`;
+            }
+
+            let playersContainer = document.getElementById("playersContainer");
+
+            // Clear existing players before updating (optional)
+            playersContainer.innerHTML = "";
+
+
+            data.players.forEach(player => {
+                let playerDiv = document.createElement("div");
+                playerDiv.className = "player"; // ✅ Corrected class assignment
+                playerDiv.innerText = player.name;
+                playerDiv.id = player.playerSocket; // ✅ Assigning socketId to playerDiv instead of playerCount
+
+
+                let img = document.createElement("img");
+                img.src = player.photoUrl;
+                img.alt = player.name; // ✅ Added alt for accessibility
+
+                let tickIcon = document.createElement("i");
+        if(player.playerAnswer === ""){
+                tickIcon.className = "tick ri-check-line"; // FontAwesome check icon
+        }
+        else{
+            tickIcon.className = "tick show ri-check-line"; // FontAwesome check icon
+        }
+                // Append elements
+                playerDiv.appendChild(img);
+                playerDiv.appendChild(tickIcon);
+                playersContainer.appendChild(playerDiv);
+                // console.log(player.photoUrl);
+            });
+            // console.log(data.players);
+        });
+
+        function sendMsg() {
+            let msgInput = document.getElementById("message-input");
+            let msg = msgInput.value.trim(); // Trim whitespace
+
+            if (msg !== "") {  // Check if message is not empty
+                socket.emit("sendMsg", { msg, socketId: socket.id });
+                msgInput.value = ""; // Clear input after sending
+            } else {
+                alert("Please type a message");
+            }
+        }
+
+        socket.on("receiveMsg", (data) => {
+            let chatBox = document.getElementsByClassName("chat-box")[0];
+
+            if (socket.id === data.sender) {
+                let ownMsg = document.createElement("div");
+                ownMsg.className = "own-message";
+                ownMsg.innerText = `${data.msg}`;
+
+                chatBox.appendChild(ownMsg);
+            }
+            else {
+                let otherMsg = document.createElement("div");
+                otherMsg.className = "other-message";
+
+                otherMsg.innerText = `${data.msg}`;
+                otherMsg.innerText = `${data.msg}`;
+
+                chatBox.appendChild(otherMsg);
+
+            }
+
+
+        });
+
+        socket.on("case", (caseData) => {
+            isset = true;
+            let caseInfo = document.getElementById("turn-indicator");
+            caseInfo.innerText = "solve the riddle, best of luck!";
+
+            document.getElementsByClassName("case-overlay")[0].style.display = "none";
+
+            let caseText = document.getElementsByClassName("case-text")[0];
+            caseText.innerText = "";
+            caseText.innerHTML = `${caseData.crimeCaseUpdated.case}`;
+
+            let caseOptions = document.getElementsByClassName("case-options")[0];
+            caseData.crimeCaseUpdated.options.forEach(option => {
+                let button = document.createElement("button"); // Create a button element
+                button.classList.add("option"); // Add class "option"
+                button.innerText = option; // Set button text
+                caseOptions.appendChild(button); // Append button to the container
+            });
+
+
+        });
+
+
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".case-options").addEventListener("click", function (event) {
+                // Check if a button is clicked and no other button has been clicked before
+                if (event.target.classList.contains("option") && !document.querySelector(".clicked")) {
+                    let selectedAnswer = event.target.innerText;
+
+
+                    // Send the selected answer to the backend
+                    fetch("/submit-answer", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            roomId: roomId,
+                            socketId: socket.id,
+                            answer: selectedAnswer
+                        })
+                    })
+                        .then(response => response.json()) // Parse response JSON
+                        .then(data => {
+
+                            // alert(data.message); // Show alert with message
+                            if (data.message === "Answer recorded") {
+                                socket.emit("answerSubmitted", { socketId: socket.id });
+
+                                // Add "clicked" class to all buttons
+                                document.querySelectorAll(".option").forEach(button => {
+                                    button.classList.add("clicked");
+
+                                    button.disabled = true; // Disable all buttons
+
+                                });
+                            }
+                            else {
+                                alert("an error occoured");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error submitting answer:", error);
+                            alert("Failed to submit answer. Please try again.");
+                        });
+                }
+            });
+        });
+
+        socket.on("submittedAnswer", (data) => {
+          //  console.log(data.socketId);
+        let playerDiv = document.getElementById(data.socketId);
+          let tick = playerDiv.querySelector(".tick"); // Get the tick inside this player div
+          tick.classList.add("show"); // Show the tick
+        });
+
+
+        socket.on("transfere", (url) => {
+    window.location.href = url;
+});
+
+    </script>
+
+<script>
+
+    socket.on("showScore", (players) => {
+        const scoreboard = document.getElementById("scoreboard");
+        const playersList = document.getElementById("players-list");
+
+        // Clear previous results
+        playersList.innerHTML = "";
+
+        // Add new players dynamically
+        if (players && players.length > 0) {  // ✅ Check if players array has values
+    players.forEach(player => {
+        const playerDiv = document.createElement("div");
+        playerDiv.classList.add("player");
+
+        playerDiv.innerHTML = `
+            <img src="${player.photoUrl}" alt="${player.name}">
+            <div class="player-info">${player.name} - guessed it right</div>
+        `;
+
+        playersList.appendChild(playerDiv);
+    });
+} else {  // ✅ Handles empty array or null
+    playersList.innerText = "No one Guessed It Right!!!";
+}
+
+// Ensure scoreboard is visible
+scoreboard.style.display = "block";
+    
+        // Show the scoreboard with animation
+  
+    
+        setTimeout(() => {
+            scoreboard.style.opacity = "1";
+            scoreboard.style.transform = "translate(-50%, -50%) scale(1)";
+        }, 10);
+    });
+</script>
+
+
+
+
+
+</body>
+
+</html>
