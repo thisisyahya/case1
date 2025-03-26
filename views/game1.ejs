@@ -503,7 +503,7 @@ window.addEventListener("beforeunload", function (event) {
   event.returnValue = ""; // Required for standard behavior
 
   // Custom confirmation dialog
-  const confirmation = confirm("If you reload, you will be disconnected.\n\nDo you want to reload?");
+  const confirmation = confirm("relaod might cause permanent disconnect or room deletion if you are only present!");
 
   if (!confirmation) {
     history.pushState(null, "", location.href); // Prevents reload
