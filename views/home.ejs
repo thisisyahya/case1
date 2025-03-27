@@ -430,7 +430,7 @@ background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+
        <p class="creds-meta" style="font-size:14px; text-align: center; color:#5e5e5e; width:250px; margin:0px auto;">neves loss your progress and name in leader board after login</p>
     </div>
 
-    <% if (!user) { %>
+    <% if (user) { %>
         <script>
             document.querySelectorAll(".creds").forEach(el => el.style.display = "none");
         </script>
