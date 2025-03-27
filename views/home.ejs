@@ -52,7 +52,7 @@
             margin-right: auto;
         }
 
-        .nav a:nth-child(1) {
+        .nav-account {
             text-decoration: none;
             padding: 10px 0px;
             width: 150px;
@@ -63,11 +63,13 @@
             border: 1px solid #3d3d3d;
         }
 
-        .nav a:nth-child(2) {
-            background-color: rgb(255, 250, 186);
-            color: rgb(255, 255, 255);
-            border: none;
-            background: #833ab4;
+        .nav-subscription {
+            text-decoration: none;
+            padding: 10px 0px;
+            width: 150px;
+            text-align: center;
+            border-radius: 50px;
+        color:white;
             /* fallback for old browsers */
             background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
             /* Chrome 10-25, Safari 5.1-6 */
@@ -81,8 +83,8 @@
         .profile {
             margin-left: auto;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             border-radius: 100%;
             border: 1px solid #CCCCCC;
             display: none;
@@ -456,10 +458,10 @@
     <header class="nav">
         <div class="nav-links">
             <% if (!user) { %>
-                <a href="/login">Login</a>
-                <a href="/subscription">Subscribe</a>
+                <a href="/login" class="nav-account">Login</a>
+                <a href="/subscription" class="nav-subscription ">Subscribe</a>
                 <% } else { %>
-                    <a href="/subscription" style="margin:auto;">Subscribe</a>
+                    <a href="/subscription" style="margin:auto;" class="nav-subscription">Subscribe</a>
         </div>
         <a href="/profile/<%=user.profileId%>" style="text-decoration: none;">
             <div class="profile" style="display:block;">
@@ -496,15 +498,18 @@
                     your progress and name in leader board after login</p>
             </div>
 
-            <% if (!user) { %>
+            <% if (user) { %>
                 <script>
                     document.querySelectorAll(".creds").forEach(el => el.style.display = "none");
                 </script>
                 <div id="whenLoggedIn">
-                    <p><strong>Username:</strong>Yahya Ali</p>
-                    <p><strong>Email:</strong>theblogs@gmail.com</p>
-                    <p><strong>Game ID:</strong>954038</p>
-                    <button id="joinRoom">Join Room</button>
+                    <div style="display: flex; gap:8px; align-items: center;">
+                    </strong> <%= user.name %></p>
+                    <img src="<%= user.photoUrl %>" style="width:30x; height:30px; border-radius: 100%;">
+                </div>
+                    <p><strong>Email:</strong><%=user.email %></p>
+                    <p><strong>Game ID:</strong>"N/A"</p>
+                    <button id="joinRoom">join public room</button>
                 </div>
 
                 <style>
