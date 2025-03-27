@@ -401,14 +401,16 @@ background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+
                 <a href="/login">Login</a>
             <% } else { %>
                 <a href="/logout">Logout</a>
-            <% } %>            
+                       
         <a href="/subscription">Subscribe</a>
     </div>
-        <div class="profile">
-            <img src="" class="nav-img">
+    <a href="/profile/<%=user.profileId%>" style="text-decoration: none;">
+        <div class="profile" style="display:block;">
+            <img src="<%=user.photoUrl%>" class="nav-img">
         </div>
+    </a>
+        <% } %> 
     </header>
-
 
 
 <section class="public-room">
